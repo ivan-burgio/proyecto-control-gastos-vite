@@ -1,7 +1,10 @@
 import { useState } from "react";
+import Mensaje from "./Mensaje";
 import CerrarBtn from '../img/cerrar.svg';
 
-export default function Modal({setModal, animarModal, setAnimarModal}) {
+export default function Modal({setModal, animarModal, setAnimarModal, guardarGasto}) {
+    const [mensaje, setMensaje] = useState('');
+
     const [nombre, setNombre] = useState('');
     const [cantidad, setCantidad] = useState(0);
     const [categoria, setCategoria] = useState('');
@@ -14,6 +17,22 @@ export default function Modal({setModal, animarModal, setAnimarModal}) {
             setModal(false);
         }, 500);
     }
+    
+    const handleSubmit = e => {
+        e.preventDefault();
+        
+        if([nombre, cantidad, categoria].includes('')) {
+            setMensaje('Llene todos los campos');
+
+            setTimeout(() => {
+                setMensaje('');
+            }, 3000);
+            
+            return;
+        }
+
+        guardarGasto({nombre, cantidad, categoria});
+    }
 
     return (
         <div className="modal">
@@ -25,8 +44,12 @@ export default function Modal({setModal, animarModal, setAnimarModal}) {
                 />
             </div>
 
-            <form className={`formulario ${animarModal ? "animar" : "cerrar"}`}>
+            <form
+                className={`formulario ${animarModal ? "animar" : "cerrar"}`}
+                onSubmit={handleSubmit}
+            >
                 <legend>Nuevo Gasto</legend>
+                {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
 
                 <div className="campo">
                     <label htmlFor="nombre">Nombre del Gasto</label>
