@@ -2,7 +2,7 @@ import React from 'react'
 import NuevoPresupuesto from './NuevoPresupuesto';
 import ControlPresupuesto from './ControlPresupuesto';
 
-export default function Header({presupuesto, setPresupuesto, isValidPresupuesto, setIsValidPresupuesto}) {
+export default function Header({presupuesto, setPresupuesto, isValidPresupuesto, setIsValidPresupuesto, gastos}) {
   return (
     <>
         <header>
@@ -10,6 +10,7 @@ export default function Header({presupuesto, setPresupuesto, isValidPresupuesto,
 
             {isValidPresupuesto ? (
                 <ControlPresupuesto 
+                    gastos = {gastos}
                     presupuesto = {presupuesto}
                 />
             ) : (

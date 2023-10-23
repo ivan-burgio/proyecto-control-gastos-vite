@@ -1,6 +1,13 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 
-export default function ControlPresupuesto({ presupuesto }) {
+export default function ControlPresupuesto({presupuesto, gastos}) {
+    const [disponible, setDisponible] = useState(0);
+    const [gastado, setGastado] = useState(0);
+
+    useEffect(() => {
+        const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0);
+        setGastado(totalGastado);
+    }, [gastos])
 
     const formatearCantidad = cantidad => {
         const formatter = new Intl.NumberFormat('en-US', {
@@ -23,11 +30,11 @@ export default function ControlPresupuesto({ presupuesto }) {
                 </p>
 
                 <p>
-                    <span>Disponible: </span> {formatearCantidad(0)}
+                    <span>Disponible: </span> {formatearCantidad(disponible)}
                 </p>
 
                 <p>
-                    <span>Gastado: </span> {formatearCantidad(0)}
+                    <span>Gastado: </span> {formatearCantidad(gastado)}
                 </p>
             </div>
         </div>
