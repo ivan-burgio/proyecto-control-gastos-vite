@@ -1,7 +1,7 @@
 import React from 'react';
 import Gasto from './Gasto';
 
-export default function ListadoGastos({gastos}) {
+export default function ListadoGastos({gastos, setGastoEditar}) {
     return (
         <div className='listado-gastos contenedor'>
             <h2>{gastos.length ? 'Gastos' : 'No hay gastos aún'}</h2>
@@ -10,6 +10,7 @@ export default function ListadoGastos({gastos}) {
                 <Gasto
                     key = {gasto.id}
                     gasto = {gasto}
+                    setGastoEditar = {setGastoEditar}
                 />
             ))}
         </div>
