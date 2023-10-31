@@ -6,11 +6,14 @@ import { generarId } from './helpers';
 import IconoNuevoGasto from './img/nuevo-gasto.svg';
 
 export default function App() {
-    const [gastos, setGastos] = useState([]);
+    const [gastos, setGastos] = useState(
+        localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+    );
 
     const [presupuesto, setPresupuesto] = useState(
         Number(localStorage.getItem('presupuesto')) ?? 0
     );
+    
     const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
 
     const [modal, setModal] = useState(false);
@@ -32,6 +35,10 @@ export default function App() {
     useEffect(() => {
         localStorage.setItem('presupuesto', presupuesto ?? 0);
     }, [presupuesto]);
+
+    useEffect(() => {
+        localStorage.setItem('gastos', JSON.stringify(gastos) ?? []);
+    }, [gastos]);
 
     useEffect(() => {
         const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0;
