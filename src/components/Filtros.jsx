@@ -10,7 +10,7 @@ export default function Filtros({filtro, setFiltro}) {
                         value={filtro}
                         onChange={e => setFiltro(e.target.value)}
                     >
-                        <option value="">-- Seleccionar --</option>
+                        <option value="">Todas las Categorias</option>
                         <option value="ahorro">Ahorro</option>
                         <option value="comida">Comida</option>
                         <option value="facturas">Facturas</option>
